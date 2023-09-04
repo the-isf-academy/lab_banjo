@@ -1,5 +1,4 @@
 from banjo.urls import route_get, route_post
-from banjo.http import BadRequest
 from .models import Riddle
 
 
