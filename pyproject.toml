@@ -4,10 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["emma <eqbrown@isf.edu.hk>"]
 readme = "README.md"
-packages = [{include = "riddle_server"}]
+packages = [{include = "lab_banjo"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 django-banjo = "^0.3.0"
 fuzzywuzzy = "^0.18.0"
 
