@@ -15,21 +15,37 @@ class Riddle(Model):
 
         return f"<Riddle { self.id}: { self.question} ({self.correct}/{self.guesses})>"
 
-    
-    def to_dict_answerless(self):
+
+    def json_response(self):
         return {
-            "correct": self.correct,
-            "guesses": self.guesses,
             "id": self.id,
-            "question": self.question
+            "question": self.question,
+            "answer": self.answer,
+            "guesses": self.guesses,
+            "correct": self.correct
+        }
+    
+    def json_response_answerless(self):
+        return {
+            "id": self.id,
+            "question": self.question,
+            "correct": self.correct,
+            "guesses": self.guesses
         }
 
-    def to_dict_difficulty(self):
+    def json_response_difficulty(self):
         return {
             "id": self.id,
             "question": self.question,
             "difficulty": self.difficulty(),
         }
+    
+    def json_response_incorrect_guess(self):
+        return(
+            {'id': self.id,
+            'question': self.question,
+            'guesses': self.guesses}
+        )
 
 
     def difficulty(self):
@@ -57,6 +73,7 @@ class Riddle(Model):
         With smoothing, a Riddle's difficulty can only be really high if there are few correct guesses
         and a lot of guesses. This seems like the right way to define difficulty.
         """
+
         return 1 - (self.correct + 1) / (self.guesses + 1)
 
 
@@ -72,7 +89,8 @@ class Riddle(Model):
         - "a stik"          92
         - "stick"           83
         - "it's a stick"    74
-        - "idk"             40                                                                                             """
+        - "idk"             40   
+                                                                                                                                                                                            """
         self.guesses += 1
         similarity = fuzz.ratio(guess.lower(), self.answer.lower())
         
@@ -86,9 +104,3 @@ class Riddle(Model):
         
 
 
-    def incorrect_guess(self):
-        return(
-            {'id': self.id,
-            'question': self.question,
-            'guesses': self.guesses}
-        )

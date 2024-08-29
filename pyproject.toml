@@ -2,13 +2,12 @@
 name = "lab-banjo"
 version = "0.1.0"
 description = ""
-authors = ["emma <eqbrown@isf.edu.hk>"]
+authors = ["Emma <eqbrown@isf.edu.hk>"]
 readme = "README.md"
-packages = [{include = "lab_banjo"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django-banjo = "^0.3.0"
+django-banjo = "^0.7.2"
 fuzzywuzzy = "^0.18.0"
 
 
